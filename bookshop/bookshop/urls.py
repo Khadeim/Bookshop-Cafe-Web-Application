@@ -20,12 +20,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("bookshop_app.urls")),
-    path('', include('menu.urls')),
-    path('', include('books.urls')),
-    path('', include('orders.urls')),
 
-    #Login and Logout routes
+    path('', include('bookshop_app.urls')),      # root URL (bookshop_app)
+    path('menu/', include('menu.urls')),          # /menu/...
+    path('books/', include('books.urls')),        # /books/...
+    path('orders/', include('orders.urls')),      # /orders/...
+
+    # Login and Logout routes
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
