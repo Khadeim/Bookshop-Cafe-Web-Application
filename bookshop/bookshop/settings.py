@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "menu",
     "books",
     "orders",
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
