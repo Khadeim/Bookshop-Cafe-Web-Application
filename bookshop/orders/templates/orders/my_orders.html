@@ -1,0 +1,36 @@
+<!-- uses base.html formatting -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>My Orders</h2>
+  {% if orders %}
+    <ul>
+      {% for order in orders %}
+        <li>
+          <strong>Order #{{ order.id }}</strong><br>
+          Name: {{ order.customer_name }}<br>
+          Address: {{ order.customer_address }}<br>
+          Ordered on: {{ order.created_at|date:"d M Y H:i" }}<br>
+          {% if order.ordered_books.exists %}
+            <em>Books:</em>
+            <ul>
+              {% for book in order.ordered_books.all %}
+                <li>{{ book.title }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if order.ordered_menu_items.exists %}
+            <em>Menu Items:</em>
+            <ul>
+              {% for item in order.ordered_menu_items.all %}
+                <li>{{ item.name }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no orders yet.</p>
+  {% endif %}
+{% endblock %}

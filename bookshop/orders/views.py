@@ -23,3 +23,9 @@ def create_order(request):
         form = OrderForm()
 
     return render(request, 'orders/create_order.html', {'form': form})
+
+# displays logged in users orders
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'orders/my_orders.html', {'orders': orders})
